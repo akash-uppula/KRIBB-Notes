@@ -31,3 +31,11 @@ npx expo install @supabase/supabase-js react-native-url-polyfill expo-sqlite
 ```
 npx expo install @react-native-async-storage/async-storage
 ```
+
+```
+npx expo install expo-image-picker
+```
+
+```
+npx expo install expo-file-system
+```

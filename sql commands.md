@@ -214,3 +214,50 @@ using (
 );
 
 ```
+
+```
+create policy "Users can upload property images"
+on storage.objects
+for insert
+to authenticated
+with check (
+  bucket_id = 'property-images'
+  and (storage.foldername(name))[1] = (select auth.jwt()->>'sub')
+);
+```
+
+```
+create policy "Users can view property images"
+on storage.objects
+for select
+to authenticated
+using (
+  bucket_id = 'property-images'
+);
+```
+
+```
+create policy "Users can update their property images"
+on storage.objects
+for update
+to authenticated
+using (
+  bucket_id = 'property-images'
+  and (storage.foldername(name))[1] = (select auth.jwt()->>'sub')
+)
+with check (
+  bucket_id = 'property-images'
+  and (storage.foldername(name))[1] = (select auth.jwt()->>'sub')
+);
+```
+
+```
+create policy "Users can delete their property images"
+on storage.objects
+for delete
+to authenticated
+using (
+  bucket_id = 'property-images'
+  and (storage.foldername(name))[1] = (select auth.jwt()->>'sub')
+);
+```
